@@ -1,0 +1,13 @@
+from compiler.lexer.Expr import *
+from compiler.parser.keyword import *
+
+
+def parse(token_arr: tuple or list, origin: str) -> list or tuple:
+    if type(token_arr) not in (tuple, list):
+        raise TypeError()
+
+    elif token_arr[0] == PRINT:
+        return PrintExpr(origin).elements
+
+    elif str().join(token_arr[-5]) == ASSIGN:
+        return AssignExpr(origin).elements

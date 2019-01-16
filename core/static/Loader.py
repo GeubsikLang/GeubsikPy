@@ -1,6 +1,7 @@
 import pathlib
 
 from compiler.lexer.Tokenizer import Lexer
+from compiler.parser.Parser import parse
 
 
 class LoadFromFile(object):
@@ -15,8 +16,9 @@ class LoadFromFile(object):
 
         self.lexer = Lexer(self.program_object.read_text(encoding="UTF-8"))
 
-        for line in self.lexer.analyze():
-            print(line)
+        for line, script in enumerate(self.lexer.analyze()):
+            print(parse(script, self.lexer.lines[line]))
+            line += 1  # For human
 
     @property
     def bytecode(self) -> bytes:
