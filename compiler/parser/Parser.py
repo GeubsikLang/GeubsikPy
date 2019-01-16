@@ -1,5 +1,6 @@
-from compiler.parser.Expr import *
-from compiler.parser.Keyword import *
+from compiler.parser.Expr import PrintExpr, AssignExpr
+from compiler.parser.Keyword import PRINT, ASSIGN
+from core.Except import syntax_error
 
 
 def parse(token_arr: tuple or list, origin: str) -> list or tuple:
@@ -13,5 +14,4 @@ def parse(token_arr: tuple or list, origin: str) -> list or tuple:
         return AssignExpr(origin).elements
 
     else:
-        raise SyntaxError(f"{origin}\n"
-                          f"{Expression.fmt_err}↑ ㄹㅇ 이게 뭔지 1도 모르겠구연~")
+        syntax_error(origin)

@@ -1,7 +1,8 @@
 import re
 from re import search
 
-from compiler.parser.Keyword import *
+from compiler.parser.Keyword import ASSIGN, PRINT
+from core.Except import syntax_error
 
 
 class Expression(object):
@@ -12,14 +13,7 @@ class Expression(object):
 
     def elements(self):
         if not self.tokens:
-            raise SyntaxError(
-                self.expr +
-                f"{self.fmt_err}↑ 이거 솔직히 답없다 ㅇㅈ?"
-            )
-
-    @property
-    def fmt_err(self) -> str:
-        return "\n\t\t\t\t"
+            syntax_error(self.expr)
 
 
 class AssignExpr(Expression):
