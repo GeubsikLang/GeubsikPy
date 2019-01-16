@@ -21,5 +21,5 @@ class LoadFromFile(object):
             line += 1  # For human
 
     @property
-    def bytecode(self) -> bytes:
-        return b''
+    def ast(self) -> str:
+        return ""

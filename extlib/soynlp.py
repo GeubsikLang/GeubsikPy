@@ -2,7 +2,6 @@
 https://github.com/lovit/soynlp
 """
 
-
 import re
 
 

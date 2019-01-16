@@ -11,3 +11,7 @@ def parse(token_arr: tuple or list, origin: str) -> list or tuple:
 
     elif token_arr[-5] == ASSIGN:
         return AssignExpr(origin).elements
+
+    else:
+        raise SyntaxError(f"{origin}\n"
+                          f"{Expression.fmt_err}↑ ㄹㅇ 이게 뭔지 1도 모르겠구연~")
