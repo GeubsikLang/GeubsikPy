@@ -1,6 +1,7 @@
 import re
+from re import search
 
-from compiler.parser.keyword import *
+from compiler.parser.Keyword import *
 
 
 class Expression(object):
@@ -26,7 +27,7 @@ class AssignExpr(Expression):
     def __init__(self, expr: str):
         super().__init__()
         self.expr = expr
-        self.tokens = re.search(
+        self.tokens = search(
             r'(?P<var_name>[a-zA-Z가-힣][a-zA-Z가-힣0-9_]*)[은는]'
             r'(?P<value>.+)인거 ㅇㅈ\? ㅇ ?ㅇㅈ~', self.expr
         )
@@ -46,7 +47,7 @@ class PrintExpr(Expression):
     def __init__(self, expr: str):
         super().__init__()
         self.expr = expr
-        self.tokens = re.search(
+        self.tokens = search(
             r'앙 +(?P<context>.+)[띠띵띸]~?ㅋ?',
             expr
         )

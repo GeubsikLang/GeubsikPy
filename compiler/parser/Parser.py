@@ -1,5 +1,5 @@
-from compiler.lexer.Expr import *
-from compiler.parser.keyword import *
+from compiler.parser.Expr import *
+from compiler.parser.Keyword import *
 
 
 def parse(token_arr: tuple or list, origin: str) -> list or tuple:
@@ -9,5 +9,5 @@ def parse(token_arr: tuple or list, origin: str) -> list or tuple:
     elif token_arr[0] == PRINT:
         return PrintExpr(origin).elements
 
-    elif str().join(token_arr[-5]) == ASSIGN:
+    elif token_arr[-5] == ASSIGN:
         return AssignExpr(origin).elements

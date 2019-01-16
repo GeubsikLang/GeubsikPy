@@ -1,4 +1,3 @@
-from compiler.lexer import Expr
 from extlib.soynlp import RegexTokenizer
 
 
