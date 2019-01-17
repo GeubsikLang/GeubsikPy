@@ -2,6 +2,7 @@ import pathlib
 
 from compiler.lexer.Tokenizer import Lexer
 from compiler.parser.Parser import parse
+from core.Except import syntax_error
 
 
 class LoadFromFile(object):
@@ -16,9 +17,21 @@ class LoadFromFile(object):
 
         self.lexer = Lexer(self.program_object.read_text(encoding="UTF-8"))
 
-        for line, script in enumerate(self.lexer.analyze()):
-            print(parse(script, self.lexer.lines[line]))
-            line += 1  # For human
+        for self.line, script in enumerate(self.lexer.analyze()):
+            tokens = parse(
+                script,
+                self.lexer.lines[self.line]
+            )
+
+            if tokens == str():
+                continue
+
+            # self.line += 1  # For human
+
+            print(script, tokens)
+
+            if tokens is None:
+                syntax_error(agent=self)
 
     @property
     def ast(self) -> str:

@@ -1,2 +1,5 @@
 ASSIGN = "인거"
 PRINT = "앙"
+FNDECL = "이거"
+FNEND = "판사님도"
+FNCALL = "오지고"

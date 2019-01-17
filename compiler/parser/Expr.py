@@ -1,9 +1,9 @@
 import re
 from re import search
 
-from compiler.parser.Keyword import ASSIGN, PRINT
-from core.Except import syntax_error
-
+from compiler.parser.Keyword import ASSIGN, PRINT, FNDECL, FNCALL
+import tossi
+from extlib.soynlp import RegexTokenizer as KoreanTokenizer
 
 class Expression(object):
 
@@ -12,8 +12,8 @@ class Expression(object):
         self.expr: str = None
 
     def elements(self):
-        if not self.tokens:
-            syntax_error(self.expr)
+        if self.tokens:
+            return True
 
 
 class AssignExpr(Expression):
@@ -28,12 +28,12 @@ class AssignExpr(Expression):
 
     @property
     def elements(self) -> tuple:
-        super().elements()
-        return (
-            ASSIGN,
-            self.tokens.group("var_name"),
-            self.tokens.group("value")
-        )
+        if super().elements():
+            return (
+                ASSIGN,
+                self.tokens.group("var_name"),
+                self.tokens.group("value")
+            )
 
 
 class PrintExpr(Expression):
@@ -43,13 +43,59 @@ class PrintExpr(Expression):
         self.expr = expr
         self.tokens = search(
             r'앙 +(?P<context>.+)[띠띵띸]~?ㅋ?',
-            expr
+            self.expr
         )
 
     @property
     def elements(self) -> tuple:
-        super().elements()
-        return (
-            PRINT,
-            self.tokens.group("context")
+        if super().elements():
+            return (
+                PRINT,
+                self.tokens.group("context")
+            )
+
+
+class FnDeclExpr(Expression):
+
+    def __init__(self, expr):
+        super().__init__()
+        self.expr = expr
+        self.tokens = search(
+            # TODO: Recognize parameters
+            r'이거 ㄹㅇ (?P<fn_name>[a-zA-Z가-힣_][0-9a-zA-Z가-힣_]*)인 *부분 *ㅋㅋ*',
+            self.expr
         )
+
+    @property
+    def elements(self) -> tuple:
+        if super().elements():
+            return (
+                FNDECL,
+                self.tokens.group("fn_name")
+            )
+
+
+class FnCallExpr(Expression):
+
+    def __init__(self, expr, k):
+        super().__init__()
+        self.expr = expr
+        k[3] = re.sub(r'(?P<_>.+)고', r'\g<_>', k[3])
+        if tossi.pick(k[3][-2], '고') == '이고':
+            k[3] = re.sub(r'(?P<_>.+)이', r'\g<_>', k[3])
+        self.tokens = search(
+            # TODO: Recognize parameters
+            r'오지고 *지리고 *렛잇고 +'
+            r'(?P<fn_name>[a-zA-Z가-힣_][0-9a-zA-Z가-힣_]*){}고 *미쳐버린 *부분'.format(
+                str() if tossi.pick(k[3], '고') == '고' else '이'
+            ),
+            self.expr
+        )
+
+    @property
+    def elements(self) -> tuple:
+        if super().elements():
+            return (
+                FNCALL,
+                self.tokens.group("fn_name")
+            )
