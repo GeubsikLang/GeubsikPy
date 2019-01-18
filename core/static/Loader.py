@@ -16,7 +16,9 @@ class LoadFromFile(object):
             )
 
         self.lexer = Lexer(self.program_object.read_text(encoding="UTF-8"))
+        # self.tokens = list()
 
+    def iterable_tokens(self):
         for self.line, script in enumerate(self.lexer.analyze()):
             tokens = parse(
                 script,
@@ -28,11 +30,9 @@ class LoadFromFile(object):
 
             # self.line += 1  # For human
 
-            print(script, tokens)
+            # print(script, tokens)
 
             if tokens is None:
                 syntax_error(agent=self)
 
-    @property
-    def ast(self) -> str:
-        return ""
+            yield tokens

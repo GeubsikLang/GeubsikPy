@@ -8,7 +8,10 @@ def main():
     args.FILE = "tests/앙.기모띠"
 
     if args.FILE:
-        LoadFromFile(args.FILE).ast
+        program_loader = LoadFromFile(args.FILE)
+
+        for token in program_loader.iterable_tokens():
+            print(token)
 
 
 if __name__ == '__main__':
