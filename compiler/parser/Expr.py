@@ -1,9 +1,10 @@
 import re
 from re import search
 
-from compiler.parser.Keyword import ASSIGN, PRINT, FNDECL, FNCALL
 import tossi
-from extlib.soynlp import RegexTokenizer as KoreanTokenizer
+
+from compiler.parser.Keyword import ASSIGN, PRINT, FNDECL, FNCALL
+
 
 class Expression(object):
 

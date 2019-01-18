@@ -24,4 +24,3 @@ class Interpret(object):
         except Exception as err:
             traceback.print_exc()
             exit(err)
-

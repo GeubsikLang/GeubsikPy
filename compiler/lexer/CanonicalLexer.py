@@ -1,6 +1,5 @@
 import itertools
 
-from compiler.codegen import FnCodegen
 from compiler.parser.Keyword import *
 
 
@@ -16,10 +15,9 @@ class PythonGenerator(object):
 
             elif token_type == FNDECL:
                 fncode = tuple(itertools.takewhile(lambda x: x[0] != FNEND, tuple(loader.iterable_tokens())[line:]))
-                for i in range(len(tuple(fncode))):
+                for i in range(len(fncode)):
                     next(iterables)
-                yield (tuple(fncode))
+                yield fncode
                 continue
 
-            yield (token)
-
+            yield token
