@@ -1,5 +1,6 @@
 import argparse
 
+from compiler.lexer import CanonicalLexer
 from core.static.Loader import LoadFromFile
 
 
@@ -10,7 +11,9 @@ def main():
     if args.FILE:
         program_loader = LoadFromFile(args.FILE)
 
-        for token in program_loader.iterable_tokens():
+        generator = CanonicalLexer.PythonGenerator()
+
+        for token in generator.gen(program_loader):
             print(token)
 
 

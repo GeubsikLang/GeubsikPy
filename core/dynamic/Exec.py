@@ -4,11 +4,13 @@ import traceback
 
 class Interpret(object):
 
-    def __init__(self, py_string: str, filename: str):
+    def __init__(self, interpretable, filename: str):
         self.py_version = platform.python_version()
 
         self.filename = filename
-        self.py_string = py_string
+        self.py_string = interpretable.code
+
+        print(self.py_string)
 
     def _exec(self):
         try:
