@@ -23,5 +23,5 @@ class Interpret(object):
             print("err")
             traceback.print_exc()
             exit(err)"""
-        print("interpreter=>" + self.py_string)
+        # print("interpreter=>" + self.py_string)
         exec(self.py_string, globals())
