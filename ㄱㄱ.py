@@ -19,7 +19,7 @@ def main():
         interpreter = Interpret(args.FILE)
 
         for token in generator.gen(program_loader):
-            print(token)
+            # print(token)
 
             program_string = ProgramStringBuilder()
             program_string.build(token)
