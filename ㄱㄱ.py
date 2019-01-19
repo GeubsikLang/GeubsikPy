@@ -16,6 +16,7 @@ def main():
         program_loader = LoadFromFile(args.FILE)
 
         generator = CanonicalLexer.PythonGenerator()
+        interpreter = Interpret(args.FILE)
 
         for token in generator.gen(program_loader):
             print(token)
@@ -23,7 +24,7 @@ def main():
             program_string = ProgramStringBuilder()
             program_string.build(token)
 
-            Interpret(program_string.to_string(), args.FILE)
+            interpreter.exec(program_string.to_string())
 
         complete_time = time.time() - start_time
 
