@@ -9,7 +9,7 @@ from generators.GenerateProgram import ProgramStringBuilder
 
 def main():
     args = args_parser.parse_args()
-    args.FILE = "tests/앙.기모띠"
+    args.FILE = "tests/구구단.기모띠"
 
     if args.FILE:
         start_time = time.time()
@@ -24,7 +24,7 @@ def main():
 
             program_string.build(token)
 
-            interpreter.exec(program_string.to_string())
+        interpreter.exec(program_string.to_string())
 
         complete_time = time.time() - start_time
 

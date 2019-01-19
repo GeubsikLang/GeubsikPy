@@ -1,4 +1,4 @@
-from compiler.codegen.BuiltinsCodegen import PrintBuilder
+from compiler.codegen.BuiltinsCodegen import PrintBuilder, WhileBuilder
 from compiler.codegen.FunctionCodegen import FunctionBuilder
 from compiler.parser.Keywords import *
 from generators.StringBuilder import StringBuilder
@@ -14,17 +14,23 @@ class ProgramStringBuilder(object):
         # Analyze if token is multidimensional
         if isinstance(items[0], tuple):
             for item in items:
-                if item[0] == FNDECL:
+                _type = item[0]
+                if _type == FNDECL:
                     self.println(FunctionBuilder().format(item[1]))
+                    self.indent += 1
+                elif _type == WHILE:
+                    self.println(WhileBuilder().format(item[1]))
                     self.indent += 1
                 else:
                     self._build(item)
 
         else:
-            if items[0] == FNEND:
-                if self.indent <= 0:
-                    raise IndentationError("너 왜 똑같은거 한번 더쓰냐?")
+            _type = items[0]
+            if (_type == FNEND
+                    or _type == WHILEEND):
                 self.indent -= 1
+                if self.indent < 0:
+                    raise IndentationError("너 왜 똑같은거 한번 더쓰냐?")
             else:
                 self._build(items)
 

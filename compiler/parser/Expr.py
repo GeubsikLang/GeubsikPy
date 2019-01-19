@@ -3,7 +3,7 @@ from re import search
 
 import tossi
 
-from compiler.parser.Keywords import ASSIGN, PRINT, FNDECL, FNCALL
+from compiler.parser.Keywords import ASSIGN, PRINT, FNDECL, FNCALL, WHILE
 
 
 class Expression(object):
@@ -99,4 +99,23 @@ class FnCallExpr(Expression):
             return (
                 FNCALL,
                 self.tokens.group("fn_name")
+            )
+
+
+class WhileExpr(Expression):
+
+    def __init__(self, expr: str):
+        super().__init__()
+        self.expr = expr
+        self.tokens = search(
+            r'와 *방금 *개꿀잼 *시나리오 *생각해냄(?P<condition>.+)\?+',
+            self.expr
+        )
+
+    @property
+    def elements(self) -> tuple:
+        if super().elements():
+            return (
+                WHILE,
+                self.tokens.group("condition")
             )
