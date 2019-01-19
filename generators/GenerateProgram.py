@@ -22,6 +22,8 @@ class ProgramStringBuilder(object):
 
         else:
             if items[0] == FNEND:
+                if self.indent <= 0:
+                    raise IndentationError("너 왜 똑같은거 한번 더쓰냐?")
                 self.indent -= 1
             else:
                 self._build(items)

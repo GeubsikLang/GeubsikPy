@@ -16,12 +16,12 @@ def main():
         program_loader = LoadFromFile(args.FILE)
 
         generator = CanonicalLexer.PythonGenerator()
+        program_string = ProgramStringBuilder()
         interpreter = Interpret(args.FILE)
 
         for token in generator.gen(program_loader):
             # print(token)
 
-            program_string = ProgramStringBuilder()
             program_string.build(token)
 
             interpreter.exec(program_string.to_string())
