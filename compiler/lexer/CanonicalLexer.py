@@ -1,6 +1,6 @@
 import itertools
 
-from compiler.parser.Keyword import *
+from compiler.parser.Keywords import *
 
 
 class PythonGenerator(object):

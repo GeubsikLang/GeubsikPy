@@ -3,7 +3,7 @@ from re import search
 
 import tossi
 
-from compiler.parser.Keyword import ASSIGN, PRINT, FNDECL, FNCALL
+from compiler.parser.Keywords import ASSIGN, PRINT, FNDECL, FNCALL
 
 
 class Expression(object):

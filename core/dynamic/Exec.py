@@ -1,19 +1,18 @@
 import platform
-import traceback
 
 
 class Interpret(object):
 
-    def __init__(self, interpretable, filename: str):
+    def __init__(self, py_string: str, filename: str):
         self.py_version = platform.python_version()
 
         self.filename = filename
-        self.py_string = interpretable.code
+        self.py_string = py_string
 
-        print(self.py_string)
+        self._exec()
 
     def _exec(self):
-        try:
+        """try:
             exec(
                 compile(
                     self.py_string,
@@ -22,5 +21,7 @@ class Interpret(object):
             )
 
         except Exception as err:
+            print("err")
             traceback.print_exc()
-            exit(err)
+            exit(err)"""
+        print("interpreter=>" + self.py_string)

@@ -2,7 +2,9 @@ import argparse
 import time
 
 from compiler.lexer import CanonicalLexer
+from core.dynamic.Exec import Interpret
 from core.static.Loader import LoadFromFile
+from generators.GenerateProgram import ProgramStringBuilder
 
 
 def main():
@@ -17,6 +19,11 @@ def main():
 
         for token in generator.gen(program_loader):
             print(token)
+
+            program_string = ProgramStringBuilder()
+            program_string.build(token)
+
+            Interpret(program_string.to_string(), args.FILE)
 
         complete_time = time.time() - start_time
 

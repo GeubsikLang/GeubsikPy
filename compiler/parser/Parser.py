@@ -1,24 +1,29 @@
 from compiler.parser.Expr import PrintExpr, AssignExpr, FnDeclExpr, FnCallExpr
-from compiler.parser.Keyword import PRINT, ASSIGN, FNDECL, FNEND, FNCALL
+from compiler.parser.Keywords import PRINT, ASSIGN, FNDECL, FNEND, FNCALL
 
 
 def parse(token_arr: tuple or list, origin: str) -> list or tuple:
     if not token_arr:
         return str()
 
-    elif token_arr[0] == PRINT:
+    _type = token_arr[0]
+
+    if not _type:
+        return str()
+
+    elif _type == PRINT:
         return PrintExpr(origin).elements
 
     elif token_arr[-5] == ASSIGN:
         return AssignExpr(origin).elements
 
-    elif token_arr[0] == FNDECL:
+    elif _type == FNDECL:
         return FnDeclExpr(origin).elements
 
-    elif token_arr[0] == FNEND:
+    elif _type == FNEND:
         return FNEND,
 
-    elif token_arr[0] == FNCALL:
+    elif _type == FNCALL:
         return FnCallExpr(origin, token_arr.copy()).elements
 
     else:
