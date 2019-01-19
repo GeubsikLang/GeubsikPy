@@ -5,7 +5,8 @@ from compiler.parser.Keyword import *
 
 class PythonGenerator(object):
 
-    def gen(self, loader: iter):
+    @staticmethod
+    def gen(loader: iter):
         iterables = loader.iterable_tokens()
         for line, token in enumerate(iterables):
             token_type = token[0]
@@ -14,10 +15,10 @@ class PythonGenerator(object):
                 continue
 
             elif token_type == FNDECL:
-                fncode = tuple(itertools.takewhile(lambda x: x[0] != FNEND, tuple(loader.iterable_tokens())[line:]))
-                for i in range(len(fncode)):
+                lv = tuple(itertools.takewhile(lambda t: t[0] != FNEND, tuple(loader.iterable_tokens())[line:]))
+                for i in range(len(lv) - 1):
                     next(iterables)
-                yield fncode
+                yield lv
                 continue
 
             yield token

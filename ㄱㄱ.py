@@ -1,4 +1,5 @@
 import argparse
+import time
 
 from compiler.lexer import CanonicalLexer
 from core.static.Loader import LoadFromFile
@@ -9,12 +10,17 @@ def main():
     args.FILE = "tests/앙.기모띠"
 
     if args.FILE:
+        start_time = time.time()
         program_loader = LoadFromFile(args.FILE)
 
         generator = CanonicalLexer.PythonGenerator()
 
         for token in generator.gen(program_loader):
             print(token)
+
+        complete_time = time.time() - start_time
+
+        print("Compile finished in %fs" % complete_time)
 
 
 if __name__ == '__main__':
