@@ -1,4 +1,5 @@
 import platform
+import time
 
 
 class Interpret(object):
@@ -10,18 +11,21 @@ class Interpret(object):
         self.py_string = None
 
     def exec(self, py_string: str):
+        # noinspection PyPep8Naming,NonAsciiCharacters
+        급식어컴파일러인부분 = "exec"
         self.py_string = py_string
-        """try:
+        # print("interpreter=>" + self.py_string)
+
+        try:
             exec(
                 compile(
                     self.py_string,
-                    self.filename, "exec"
+                    self.filename,
+                    급식어컴파일러인부분
                 )
             )
 
         except Exception as err:
-            print("err")
-            traceback.print_exc()
-            exit(err)"""
-        # print("interpreter=>" + self.py_string)
-        exec(self.py_string)
+            time.sleep(.1)
+            print("A Python exception is occurred.")
+            exit(err)
