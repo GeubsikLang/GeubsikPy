@@ -108,14 +108,15 @@ class WhileExpr(Expression):
         super().__init__()
         self.expr = expr
         self.tokens = search(
-            r'와 *방금 *개꿀잼 *시나리오 *생각해냄(?P<condition>.+)\?+',
+            r'와 *방금 *개꿀잼 *시나리오 *생각해냄(?P<condition>.*)\?+',
             self.expr
         )
 
     @property
     def elements(self) -> tuple:
         if super().elements():
+            c = self.tokens.group("condition")
             return (
                 WHILE,
-                self.tokens.group("condition")
+                c if c.strip() != '' else True.__str__()
             )

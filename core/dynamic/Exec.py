@@ -20,7 +20,7 @@ class Interpret(object):
             exec(
                 compile(
                     self.py_string,
-                    self.filename,
+                    "급식급식",
                     급식어컴파일러인부분
                 )
             )
