@@ -11,7 +11,7 @@ def main():
     args = args_parser.parse_args()
     args.FILE = "tests/구구단.기모띠"
 
-    if args.FILE:
+    if args.FILE.endswith(".기모띠"):
         start_time = time.time()
         program_loader = LoadFromFile(args.FILE)
 
@@ -29,6 +29,11 @@ def main():
         complete_time = time.time() - start_time
 
         print("Compile finished in %fs" % complete_time)
+
+    else:
+        print(
+            "확장자는 기모띠여야지 바보야"
+        )
 
 
 if __name__ == '__main__':
