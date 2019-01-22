@@ -28,4 +28,11 @@ class PythonGenerator(object):
                 yield lv
                 continue
 
+            elif token_type == IF:
+                lv = tuple(itertools.takewhile(lambda t: t[0] != IFEND, tuple(loader.iterable_tokens())[line:]))
+                for i in range(len(lv) - 1):
+                    next(iterables)
+                yield lv
+                continue
+
             yield token

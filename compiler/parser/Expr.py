@@ -3,7 +3,7 @@ from re import search
 
 import tossi
 
-from compiler.parser.Keywords import ASSIGN, PRINT, FNDECL, FNCALL, WHILE
+from compiler.parser.Keywords import ASSIGN, PRINT, FNDECL, FNCALL, WHILE, IF, ELSEIF
 
 
 class Expression(object):
@@ -119,4 +119,42 @@ class WhileExpr(Expression):
             return (
                 WHILE,
                 c if c.strip() != '' else True.__str__()
+            )
+
+
+class IfExpr(Expression):
+
+    def __init__(self, expr):
+        super().__init__()
+        self.expr = expr
+        self.tokens = search(
+            r'(?P<condition>.+) *일 ?때 시청자들이',
+            self.expr
+        )
+
+    @property
+    def elements(self) -> tuple:
+        if super().elements():
+            return (
+                IF,
+                self.tokens.group("condition")
+            )
+
+
+class ElseifExpr(Expression):
+
+    def __init__(self, expr):
+        super().__init__()
+        self.expr = expr
+        self.tokens = search(
+            r'(?P<condition>.+) *일 ?때 열혈팬',
+            self.expr
+        )
+
+    @property
+    def elements(self) -> tuple:
+        if super().elements():
+            return (
+                ELSEIF,
+                self.tokens.group("condition")
             )

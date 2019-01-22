@@ -1,4 +1,5 @@
 from compiler.codegen.BuiltinsCodegen import PrintBuilder, WhileBuilder
+from compiler.codegen.ConditionCodegen import ConditionalCodeBuilder
 from compiler.codegen.FunctionCodegen import FunctionBuilder
 from compiler.parser.Keywords import *
 from generators.StringBuilder import StringBuilder
@@ -17,28 +18,32 @@ class ProgramStringBuilder(object):
                 _type = item[0]
                 if _type == FNDECL:
                     self.println(FunctionBuilder().format(item[1]))
-                    self.indent += 1
                 elif _type == WHILE:
                     self.println(WhileBuilder().format(item[1]))
-                    self.indent += 1
+                elif _type == IF:
+                    self.println(ConditionalCodeBuilder().format(item))
+                elif _type == ELSEIF:
+                    self.indent -= 1
+                    self.println(ConditionalCodeBuilder().format(item))
+                elif _type == ELSE:
+                    self.indent -= 1
+                    self.println('else:')
                 else:
                     self._build(item)
+                    continue
+
+                self.indent += 1
 
         else:
-            _type = items[0]
-            if (_type == FNEND
-                    or _type == WHILEEND):
-                self.indent -= 1
-                if self.indent < 0:
-                    raise IndentationError("너 왜 똑같은거 한번 더쓰냐?")
-            else:
-                self._build(items)
+            self._build(items)
 
     def _build(self, item):
         do = self.println
         token_t = item[0]
-        if type(token_t) != str:
-            return
+        if token_t in (FNEND, WHILEEND, IFEND):
+            self.indent -= 1
+            if self.indent < 0:
+                raise IndentationError("너 왜 똑같은거 한번 더쓰냐?")
 
         elif token_t == PRINT:
             do(PrintBuilder().format(item[1]))

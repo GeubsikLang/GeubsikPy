@@ -34,5 +34,17 @@ def parse(token_arr: tuple or list, origin: str) -> list or tuple:
     elif _type == WHILEEND:
         return WHILEEND,
 
+    elif origin.endswith(IF):
+        return IfExpr(origin).elements
+
+    elif search(r'.+열혈팬 시청자들', origin):
+        return ElseifExpr(origin).elements
+
+    elif _type == ELSE:
+        return ELSE,
+
+    elif _type == IFEND:
+        return IFEND,
+
     else:
         return None
