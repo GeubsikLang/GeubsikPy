@@ -26,9 +26,12 @@ def main():
 
         complete_time = time.time() - start_time
 
+        start_time = time.time()
         interpreter.exec(program_string.to_string())
+        run_complete_time = time.time() - start_time
 
-        print("Compile finished in %fs" % complete_time)
+        print("Compile finished in %fs execute time: %fs" %
+              (complete_time, run_complete_time))
 
     else:
         print(
@@ -40,6 +43,6 @@ if __name__ == '__main__':
     args_parser = argparse.ArgumentParser(
         description=str()
     )
-    args_parser.add_argument("FILE", metavar="FILE", type=str, help="Program read from source file")
+    # args_parser.add_argument("FILE", metavar="FILE", type=str, help="Program read from source file")
 
     main()
