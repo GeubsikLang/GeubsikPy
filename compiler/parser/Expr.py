@@ -87,7 +87,7 @@ class FnCallExpr(Expression):
         self.tokens = search(
             # TODO: Recognize parameters
             r'오지고 *지리고 *렛잇고 +'
-            r'(?P<fn_name>[a-zA-Z가-힣_][0-9a-zA-Z가-힣_]*){} *미쳐버린 *부분'.format(
+            r'(?P<fn_name>[a-zA-Z가-힣_][0-9a-zA-Z가-힣_]*){}(?P<args>.+)? *미쳐버린 *부분'.format(
                 tossi.pick(k[3], '고')
             ),
             self.expr
@@ -98,7 +98,8 @@ class FnCallExpr(Expression):
         if super().elements():
             return (
                 FNCALL,
-                self.tokens.group("fn_name")
+                self.tokens.group("fn_name"),
+                self.tokens.group("args")
             )
 
 

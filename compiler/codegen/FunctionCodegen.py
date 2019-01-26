@@ -8,7 +8,7 @@ class FunctionBuilder(StringBuilder):
 
     def format(self, k):
         self.print(
-            "def " + k + "():"
+            "def " + k + "(*args):"
         )
 
         return self.__str__()

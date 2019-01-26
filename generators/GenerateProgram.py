@@ -3,6 +3,8 @@ from compiler.codegen.ConditionCodegen import ConditionalCodeBuilder
 from compiler.codegen.FunctionCodegen import FunctionBuilder
 from compiler.parser.Keywords import *
 from generators.StringBuilder import StringBuilder
+from generators.context.Context import add_variable
+from generators.context.ValueContext import ValueLoader
 
 
 class ProgramStringBuilder(object):
@@ -10,6 +12,7 @@ class ProgramStringBuilder(object):
     def __init__(self):
         self.program_string = StringBuilder()
         self.indent: int = 0
+        self.load_value = ValueLoader()
 
     def build(self, items: list):
         # Analyze if token is multidimensional
@@ -46,11 +49,12 @@ class ProgramStringBuilder(object):
                 raise IndentationError("너 왜 똑같은거 한번 더쓰냐?")
 
         elif token_t == PRINT:
-            do(PrintBuilder().format(item[1]))
+            do(PrintBuilder().format(self.load_value.build_context(item[1])))
         elif token_t == ASSIGN:
-            do(f"{item[1]} = {item[2]}")
+            add_variable(item[1], item[2])
+            do(f"{item[1]} = {self.load_value.build_context(item[2])}")
         elif token_t == FNCALL:
-            do(f"{item[1]}()")  # TODO: Recognize parameters
+            do(f"{item[1]}({self.load_value.build_context(item[2])})")
 
     def __str__(self) -> str:
         return self.program_string.__str__()

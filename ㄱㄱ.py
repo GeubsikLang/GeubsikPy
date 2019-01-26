@@ -9,7 +9,7 @@ from generators.GenerateProgram import ProgramStringBuilder
 
 def main():
     args = args_parser.parse_args()
-    args.FILE = "tests/콜라츠1.기모띠"
+    args.FILE = "tests/가변인자.기모띠"
 
     if args.FILE.endswith(".기모띠"):
         start_time = time.time()
