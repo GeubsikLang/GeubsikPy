@@ -12,3 +12,6 @@
  - [x] 반복문
  - [x] 표준출력
  - [x] 변수
+ 
+# 예제
+ [여기에서](https://github.com/GeubsikLang/GeubsikPy/tree/master/tests) 찾아보세여
