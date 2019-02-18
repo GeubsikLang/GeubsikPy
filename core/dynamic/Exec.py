@@ -14,7 +14,7 @@ class Interpret(object):
         # noinspection PyPep8Naming,NonAsciiCharacters
         급식어컴파일러인부분 = "exec"
         self.py_string = py_string
-        print("interpreter=>" + self.py_string)
+        # print("interpreter=>" + self.py_string)
 
         try:
             exec(

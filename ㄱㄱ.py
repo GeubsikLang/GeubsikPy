@@ -9,7 +9,6 @@ from generators.GenerateProgram import ProgramStringBuilder
 
 def main():
     args = args_parser.parse_args()
-    args.FILE = "tests/콜라츠1.기모띠"
 
     if args.FILE.endswith(".기모띠"):
         start_time = time.time()
@@ -43,6 +42,6 @@ if __name__ == '__main__':
     args_parser = argparse.ArgumentParser(
         description=str()
     )
-    # args_parser.add_argument("FILE", metavar="FILE", type=str, help="Program read from source file")
+    args_parser.add_argument("FILE", metavar="FILE", type=str, help="Program read from source file")
 
     main()
