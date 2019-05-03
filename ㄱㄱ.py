@@ -42,6 +42,6 @@ if __name__ == '__main__':
     args_parser = argparse.ArgumentParser(
         description=str()
     )
-    args_parser.add_argument("FILE", metavar="FILE", type=str, help="Program read from source file")
+    args_parser.add_argument("FILE", metavar="FILE", type=str)
 
     main()
