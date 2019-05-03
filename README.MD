@@ -1,7 +1,23 @@
 # The 급식 programming language
-**저는 한글과 한국어를 사랑합니다.**
+**저는 한국어를 사랑합니다.**
 
-## 해야 할 것
+
+```text
+헬로월드는 "Hello, world!"인거 ㅇㅈ? ㅇㅇㅈ~
+앙 헬로월드띠~
+```
+
+```text
+$python ㄱㄱ.py 너가만든거.기모띠
+Hello, world!
+```
+
+더 많은 예제는  [여기](https://github.com/GeubsikLang/GeubsikPy/tree/master/tests)서 찾을 수 있습니다.
+
+## 써보고싶어요?
+그러지 마세요
+
+## 해야 할 것들
  - [x] 조건문
  - [ ] 삼항연산자
  - [ ] 형변환
@@ -12,6 +28,3 @@
  - [x] 반복문
  - [x] 표준출력
  - [x] 변수
- 
-# 예제
- [여기에서](https://github.com/GeubsikLang/GeubsikPy/tree/master/tests) 찾아보세여
