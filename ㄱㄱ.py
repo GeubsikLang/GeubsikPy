@@ -29,8 +29,7 @@ def main():
         interpreter.exec(program_string.to_string())
         run_complete_time = time.time() - start_time
 
-        print("Compile finished in %fs execute time: %fs" %
-              (complete_time, run_complete_time))
+        # print("Compile finished in %fs execute time: %fs" % (complete_time, run_complete_time))
 
     else:
         print(
