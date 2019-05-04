@@ -15,6 +15,9 @@ def parse(token_arr: tuple or list, origin: str) -> list or tuple:
     elif _type == PRINT:
         return PrintExpr(origin).elements
 
+    elif origin.split()[1] == INPUT:
+        return InputExpr(origin).elements
+
     # 와 어려웠다;;
     elif search(r'.+[은는].+인거', origin):
         return AssignExpr(origin).elements

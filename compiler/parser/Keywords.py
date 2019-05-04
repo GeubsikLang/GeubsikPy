@@ -1,5 +1,6 @@
 ASSIGN = "인거"
 PRINT = "앙"
+INPUT = "이거"
 
 FNDECL = "이거"
 FNEND = "판사님도"

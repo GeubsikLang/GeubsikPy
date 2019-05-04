@@ -56,6 +56,25 @@ class PrintExpr(Expression):
             )
 
 
+class InputExpr(Expression):
+
+    def __init__(self, expr: str):
+        super().__init__()
+        self.expr = expr
+        self.tokens = search(
+            r'(?P<var>[a-zA-Z가-힣_][0-9a-zA-Z가-힣_]*) +이거 *ㄹㅇ ㅆ[ㅎㅅ]ㅌㅊ *인거 +ㅇㅈ\?',
+            self.expr
+        )
+
+    @property
+    def elements(self) -> tuple:
+        if super().elements():
+            return (
+                PRINT,
+                self.tokens.group("var")
+            )
+
+
 class FnDeclExpr(Expression):
 
     def __init__(self, expr):
