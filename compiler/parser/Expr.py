@@ -3,14 +3,14 @@ from re import search
 
 import tossi
 
-from compiler.parser.Keywords import ASSIGN, PRINT, FNDECL, FNCALL, WHILE, IF, ELSEIF
+from compiler.parser.Keywords import ASSIGN, PRINT, FNDECL, FNCALL, WHILE, IF, ELSEIF, INPUT
 
 
 class Expression(object):
 
     def __init__(self):
         self.tokens: re.search = None
-        self.expr: str = None
+        self.expr: str = ''
 
     def elements(self):
         if self.tokens:
@@ -70,7 +70,7 @@ class InputExpr(Expression):
     def elements(self) -> tuple:
         if super().elements():
             return (
-                PRINT,
+                INPUT,
                 self.tokens.group("var")
             )
 

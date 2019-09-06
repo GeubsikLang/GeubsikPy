@@ -1,4 +1,4 @@
-from compiler.codegen.BuiltinsCodegen import PrintBuilder, WhileBuilder
+from compiler.codegen.BuiltinsCodegen import PrintBuilder, WhileBuilder, InputBuilder
 from compiler.codegen.ConditionCodegen import ConditionalCodeBuilder
 from compiler.codegen.FunctionCodegen import FunctionBuilder
 from compiler.parser.Keywords import *
@@ -10,6 +10,7 @@ from generators.context.ValueContext import ValueLoader
 class ProgramStringBuilder(object):
 
     def __init__(self):
+        self.conditional_builder: ConditionalCodeBuilder = ConditionalCodeBuilder()
         self.program_string = StringBuilder()
         self.indent: int = 0
         self.load_value = ValueLoader()
@@ -24,10 +25,10 @@ class ProgramStringBuilder(object):
                 elif _type == WHILE:
                     self.println(WhileBuilder().format(item[1]))
                 elif _type == IF:
-                    self.println(ConditionalCodeBuilder().format(item))
+                    self.println(self.conditional_builder.format(item))
                 elif _type == ELSEIF:
                     self.indent -= 1
-                    self.println(ConditionalCodeBuilder().format(item))
+                    self.println(self.conditional_builder.format(item))
                 elif _type == ELSE:
                     self.indent -= 1
                     self.println('else:')
@@ -50,6 +51,8 @@ class ProgramStringBuilder(object):
 
         elif token_t == PRINT:
             do(PrintBuilder().format(self.load_value.build_context(item[1])))
+        elif token_t == INPUT:
+            do(InputBuilder().format(item[1]))
         elif token_t == ASSIGN:
             add_variable(item[1], item[2])
             do(f"{item[1]} = {self.load_value.build_context(item[2])}")

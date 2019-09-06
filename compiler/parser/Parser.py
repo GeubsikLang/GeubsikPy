@@ -1,6 +1,5 @@
 from compiler.parser.Expr import *
 from compiler.parser.Keywords import *
-from re import search
 
 
 def parse(token_arr: tuple or list, origin: str) -> list or tuple:
@@ -15,7 +14,7 @@ def parse(token_arr: tuple or list, origin: str) -> list or tuple:
     elif _type == PRINT:
         return PrintExpr(origin).elements
 
-    elif origin.split()[1] == INPUT:
+    elif search(r'.+이거.+', origin):
         return InputExpr(origin).elements
 
     # 와 어려웠다;;
