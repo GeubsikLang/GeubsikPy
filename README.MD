@@ -28,3 +28,8 @@ Hello, world!
  - [x] 반복문
  - [x] 표준출력
  - [x] 변수
+ 
+ # License
+Licensed under the MIT License
+
+Copyright 2019 Donghyeok Tak
