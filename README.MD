@@ -1,7 +1,9 @@
 # The 급식 programming language
 **저는 한국어를 사랑합니다.**
 
+GeubsikPy는 Python 으로 작성된, [급식어](https://github.com/GeubsikLang/GeubsikLangSpec) 의 소스 간 컴파일러입니다.
 
+`너가만든거.기모띠`
 ```text
 헬로월드는 "Hello, world!"인거 ㅇㅈ? ㅇㅇㅈ~
 앙 헬로월드띠~
