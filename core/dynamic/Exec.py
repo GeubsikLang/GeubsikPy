@@ -14,7 +14,6 @@ class Interpret(object):
         # noinspection PyPep8Naming,NonAsciiCharacters
         급식어컴파일러인부분 = "exec"
         self.py_string = py_string
-        # print("interpreter=>" + self.py_string)
 
         try:
             exec(
@@ -27,5 +26,5 @@ class Interpret(object):
 
         except Exception as err:
             time.sleep(.1)
-            print("A Python exception is occurred.")
+            print("런타임 에러는 너굴맨이 처리했으니 안심하라구!")
             # exit(err)
