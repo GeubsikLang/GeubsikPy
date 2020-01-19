@@ -3,7 +3,7 @@ from re import search
 
 import tossi
 
-from compiler.parser.Keywords import ASSIGN, PRINT, FNDECL, FNCALL, WHILE, IF, ELSEIF, INPUT
+from compiler.parser.Keywords import ASSIGN, PRINT, FNDECL, FNCALL, WHILE, IF, ELSEIF, INPUT, INPUT_INT
 
 
 class Expression(object):
@@ -62,7 +62,7 @@ class InputExpr(Expression):
         super().__init__()
         self.expr = expr
         self.tokens = search(
-            r'(?P<var>[a-zA-Z가-힣_][0-9a-zA-Z가-힣_]*) +이거 *ㄹㅇ ㅆ[ㅎㅅ]ㅌㅊ *인거 +ㅇㅈ\?',
+            r'(?P<var>[a-zA-Z가-힣_][0-9a-zA-Z가-힣_]*) +이거 *ㄹㅇ ㅆㅅㅌㅊ *인거 +ㅇㅈ\? *(ㅇ[ ]ㅇㅈ[~]*)?',
             self.expr
         )
 
@@ -71,6 +71,25 @@ class InputExpr(Expression):
         if super().elements():
             return (
                 INPUT,
+                self.tokens.group("var")
+            )
+
+
+class InputIntExpr(Expression):
+
+    def __init__(self, expr: str):
+        super().__init__()
+        self.expr = expr
+        self.tokens = search(
+            r'(?P<var>[a-zA-Z가-힣_][0-9a-zA-Z가-힣_]*) +이거 *ㄹㅇ ㅆㅎㅌㅊ *인거 +ㅇㅈ\? *(ㅇ[ ]ㅇㄴㅇ[~]*)?',
+            self.expr
+        )
+
+    @property
+    def elements(self) -> tuple:
+        if super().elements():
+            return (
+                INPUT_INT,
                 self.tokens.group("var")
             )
 

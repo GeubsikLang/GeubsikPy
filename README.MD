@@ -18,7 +18,34 @@ $python ㄱㄱ.py build 너가만든거.기모띠
 ...
 ```
 
-더 많은 예제는  [여기](https://github.com/GeubsikLang/GeubsikPy/tree/master/tests)서 찾을 수 있습니다.
+더 많은 예제는  [테스트 폴더](https://github.com/GeubsikLang/GeubsikPy/tree/master/tests)에서 찾을 수 있습니다.
+
+또는 [콜라츠 추측](https://ko.wikipedia.org/wiki/%EC%BD%9C%EB%9D%BC%EC%B8%A0_%EC%B6%94%EC%B8%A1) 을 구현한 예제를
+사용할 수 있습니다.
+
+<details>
+<summary><b>콜라츠 함수 예제</b></summary>
+<br/>
+<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ecc542a0a334586327e54f3e2501ca9832434245">
+
+<a>수식으로 표현한 콜라츠 추측</a>
+<br>
+<p>
+	<code> 
+	    대상숫자 이거 ㄹㅇ ㅆㅎㅌㅊ 인거 ㅇㅈ? ㅇㅇㅈ~ㅋ<br/>
+        횟수는 0인거 ㅇㅈ?ㅇㅇㅈ<br/>
+        와 방금 개꿀잼 시나리오 생각해냄 대상숫자 != 1?<br/>
+        대상숫자 % 2 == 0일 때 시청자들이 역으로 몰카하는거임<br/>
+        대상숫자는 대상숫자 / 2인거 ㅇㅈ?ㅇㅇㅈ~<br/>
+        그런데 갑자기 분위기 싸해지는거임<br/>
+        대상숫자는 (대상숫자 * 3) + 1인거 ㅇㅈ?ㅇㅇㅈ~ㅋ<br/>
+        유튭각 ㅇㅈ?<br/>
+        횟수는 횟수+1인거 ㅇㅈ?ㅇㅇㅈ<br/>
+        방금 상상한건데 스토리 ㅍㅌㅊ?<br/>
+        앙 횟수, "번 만에 성공!!"띠~ㅋ
+	</code>
+</p>
+</details>
 
 ## 써보고싶어요?
 그러지 마세요

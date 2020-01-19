@@ -1,4 +1,4 @@
-from compiler.codegen.BuiltinsCodegen import PrintBuilder, WhileBuilder, InputBuilder
+from compiler.codegen.BuiltinsCodegen import PrintBuilder, WhileBuilder, InputBuilder, InputIntBuilder
 from compiler.codegen.ConditionCodegen import ConditionalCodeBuilder
 from compiler.codegen.FunctionCodegen import FunctionBuilder
 from compiler.parser.Keywords import *
@@ -53,6 +53,8 @@ class ProgramStringBuilder(object):
             do(PrintBuilder().format(self.load_value.build_context(item[1])))
         elif token_t == INPUT:
             do(InputBuilder().format(item[1]))
+        elif token_t == INPUT_INT:
+            do(InputIntBuilder().format(item[1]))
         elif token_t == ASSIGN:
             add_variable(item[1], item[2])
             do(f"{item[1]} = {self.load_value.build_context(item[2])}")
