@@ -3,6 +3,8 @@
 
 GeubsikPy는 Python 으로 작성된, [급식어](https://github.com/GeubsikLang/GeubsikLangSpec) 의 소스 간 컴파일러입니다.
 
+컴파일 결과로 Python 코드가 출력됩니다.
+
 `너가만든거.기모띠`
 ```text
 헬로월드는 "Hello, world!"인거 ㅇㅈ? ㅇㅇㅈ~
@@ -10,8 +12,10 @@ GeubsikPy는 Python 으로 작성된, [급식어](https://github.com/GeubsikLang
 ```
 
 ```text
-$python ㄱㄱ.py 너가만든거.기모띠
+$python ㄱㄱ.py run 너가만든거.기모띠
 Hello, world!
+$python ㄱㄱ.py build 너가만든거.기모띠
+...
 ```
 
 더 많은 예제는  [여기](https://github.com/GeubsikLang/GeubsikPy/tree/master/tests)서 찾을 수 있습니다.

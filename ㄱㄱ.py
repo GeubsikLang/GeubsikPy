@@ -1,46 +1,55 @@
 import argparse
+import pathlib
+import sys
 import time
 
 from compiler.lexer import CanonicalLexer
 from core.dynamic.Exec import Interpret
 from core.static.Loader import LoadFromFile
+from generators.GenerateFile import FileGenerator
 from generators.GenerateProgram import ProgramStringBuilder
 
 
-def main():
-    args = args_parser.parse_args()
+def main() -> int:
+    args = parser.parse_args()
 
-    if args.FILE.endswith(".기모띠"):
-        start_time = time.time()
-        program_loader = LoadFromFile(args.FILE)
-
-        generator = CanonicalLexer.PythonGenerator()
-        program_string = ProgramStringBuilder()
-        interpreter = Interpret(args.FILE)
-
-        for token in generator.gen(program_loader):
-            # print(token)
-
-            program_string.build(token)
-
-        complete_time = time.time() - start_time
-
-        start_time = time.time()
-        interpreter.exec(program_string.to_string())
-        run_complete_time = time.time() - start_time
-
-        # print("Compile finished in %fs execute time: %fs" % (complete_time, run_complete_time))
-
-    else:
+    if not args.FILE.endswith(".기모띠"):
         print(
             "확장자는 기모띠여야지 바보야"
         )
+        return 0
+
+    start_time = time.time()
+    program_loader = LoadFromFile(args.FILE)
+
+    generator = CanonicalLexer.PythonGenerator()
+    program_string = ProgramStringBuilder()
+    interpreter = Interpret(args.FILE)
+
+    for token in generator.gen(program_loader):
+        # print(token)
+
+        program_string.build(token)
+
+    complete_time = time.time() - start_time
+
+    if args.command == "run":
+        interpreter.exec(program_string.to_string())
+
+    elif args.command == "build":
+        FileGenerator.gen(pathlib.Path(args.FILE).name.replace(".기모띠", "") + ".py", program_string.to_string())
+
+    print("\n%.5f초만에 끝났다." % complete_time)
 
 
 if __name__ == '__main__':
-    args_parser = argparse.ArgumentParser(
-        description=str()
-    )
-    args_parser.add_argument("FILE", metavar="FILE", type=str)
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(dest="command")
 
-    main()
+    parser_run = subparsers.add_parser("run")
+    parser_run.add_argument("FILE", metavar="FILE", type=str)
+
+    parser_build = subparsers.add_parser("build")
+    parser_build.add_argument("FILE", metavar="FILE", type=str)
+
+    sys.exit(main())
