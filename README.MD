@@ -18,7 +18,9 @@ $python ㄱㄱ.py build 너가만든거.기모띠
 ...
 ```
 
-더 많은 예제는  [테스트 폴더](https://github.com/GeubsikLang/GeubsikPy/tree/master/tests)에서 찾을 수 있습니다.
+언어 사양은 [GeubsikLang/GeubsikLangSpec](https://github.com/GeubsikLang/GeubsikLangSpec) 에서 확인할 수 있습니다.
+
+예제는  [테스트 폴더](https://github.com/GeubsikLang/GeubsikPy/tree/master/tests)에서 찾을 수 있습니다.
 
 또는 [콜라츠 추측](https://ko.wikipedia.org/wiki/%EC%BD%9C%EB%9D%BC%EC%B8%A0_%EC%B6%94%EC%B8%A1) 을 구현한 예가
 아래에 있으니 참고하세요.
