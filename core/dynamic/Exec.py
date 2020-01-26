@@ -1,3 +1,4 @@
+import os
 import platform
 import time
 
@@ -27,4 +28,8 @@ class Interpret(object):
         except Exception as err:
             time.sleep(.1)
             print("런타임 에러는 너굴맨이 처리했으니 안심하라구!")
-            # exit(err)
+
+            with open(self.filename + '.log', 'w', encoding="utf8") as el:
+                el.write(str(err))
+
+            os.system(self.filename + '.log')

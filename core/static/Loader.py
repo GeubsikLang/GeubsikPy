@@ -28,8 +28,6 @@ class LoadFromFile(object):
             if tokens == str():
                 continue
 
-            # self.line += 1  # For human
-
             # print(script, tokens)
 
             if tokens is None:

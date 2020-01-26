@@ -20,7 +20,6 @@ def parse(token_arr: tuple or list, origin: str) -> list or tuple:
     elif search(r'.+이거 *ㄹㅇ +ㅆㅎ.+', origin):
         return InputIntExpr(origin).elements
 
-    # 와 어려웠다;;
     elif search(r'.+[은는].+인거', origin):
         return AssignExpr(origin).elements
 

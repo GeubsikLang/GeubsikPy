@@ -14,7 +14,8 @@ class RegexTokenizer:
             ('josa', re.compile(r'[은는]', re.UNICODE)),
             ('jaum', re.compile(r'[ㄱ-ㅎ]+', re.UNICODE)),
             ('moum', re.compile(r'[ㅏ-ㅣ]+', re.UNICODE)),
-            ('english & latin', re.compile(r"[a-zA-ZÀ-ÿ]+[[`']?s]*|[a-zA-ZÀ-ÿ]+", re.UNICODE))
+            # ('english & latin', re.compile(r"[a-zA-ZÀ-ÿ]+[[`']?s]*|[a-zA-ZÀ-ÿ]+", re.UNICODE))
+            ('english & latin', re.compile(r"[a-zA-Z]+", re.UNICODE))
         ]
 
         self.double_white_pattern = re.compile(r'\s+')
