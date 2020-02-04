@@ -10,26 +10,15 @@ from generators.GenerateFile import FileGenerator
 from generators.GenerateProgram import ProgramStringBuilder
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser()
-    subparsers = parser.add_subparsers(dest="command")
-
-    parser_run = subparsers.add_parser("run")
-    parser_run.add_argument("FILE", metavar="FILE", type=str)
-
-    parser_build = subparsers.add_parser("build")
-    parser_build.add_argument("FILE", metavar="FILE", type=str)
-
-    args = parser.parse_args()
-
-    if not args.FILE.endswith(".기모띠"):
+def main(command: str, s: str) -> int:
+    if not s.endswith(".기모띠"):
         print(
             "확장자는 기모띠여야지 바보야"
         )
         return 0
 
     start_time = time.time()
-    program_loader = LoadFromFile(args.FILE)
+    program_loader = LoadFromFile(s)
 
     generator = CanonicalLexer.PythonGenerator()
     program_string = ProgramStringBuilder()
@@ -41,14 +30,29 @@ def main() -> int:
 
     complete_time = time.time() - start_time
 
-    if args.command == "run":
-        Interpret(args.FILE).exec(program_string.to_string())
+    if command == "run":
+        Interpret(s).exec(program_string.to_string())
 
-    elif args.command == "build":
-        FileGenerator.gen(pathlib.Path(args.FILE).name.replace(".기모띠", "") + ".py", program_string.to_string())
+    elif command == "build":
+        FileGenerator.gen(pathlib.Path(s).name.replace(".기모띠", "") + ".py", program_string.to_string())
 
     print("\n%.5f초만에 끝났다." % complete_time)
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(dest="command")
+
+    parser_run = subparsers.add_parser("run")
+    parser_run.add_argument("FILE", metavar="FILE", type=str)
+
+    parser_build = subparsers.add_parser("build")
+    parser_build.add_argument("FILE", metavar="FILE", type=str)
+
+    args = parser.parse_args()
+
+    if not hasattr(args, "FILE"):
+        parser.print_help()
+        sys.exit(0)
+
+    sys.exit(main(command=args.command, s=args.FILE))

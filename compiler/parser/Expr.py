@@ -100,7 +100,6 @@ class FnDeclExpr(Expression):
         super().__init__()
         self.expr = expr
         self.tokens = search(
-            # TODO: Recognize parameters
             r'이거 ㄹㅇ (?P<fn_name>[a-zA-Z가-힣_][0-9a-zA-Z가-힣_]*)인 *부분 *ㅋㅋ*',
             self.expr
         )
@@ -123,7 +122,6 @@ class FnCallExpr(Expression):
         if tossi.pick(k[3][-2], '고') == '이고':
             k[3] = re.sub(r'(?P<_>.+)이', r'\g<_>', k[3])
         self.tokens = search(
-            # TODO: Recognize parameters
             r'오지고 *지리고 *렛잇고 +'
             r'(?P<fn_name>[a-zA-Z가-힣_][0-9a-zA-Z가-힣_]*){}(?P<args>.+)? *미쳐버린 *부분'.format(
                 tossi.pick(k[3], '고')

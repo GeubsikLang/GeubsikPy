@@ -6,8 +6,7 @@ from compiler.parser.Keywords import *
 class PythonGenerator(object):
 
     @staticmethod
-    def gen(loader: iter):
-        iterables = loader.iterable_tokens()
+    def _formatter(loader, iterables):
         for line, token in enumerate(iterables):
             token_type = token[0]
 
@@ -36,3 +35,8 @@ class PythonGenerator(object):
                 continue
 
             yield token
+
+    @staticmethod
+    def gen(loader: iter):
+        yield from PythonGenerator._formatter(loader, loader.iterable_tokens()) \
+            or tuple()

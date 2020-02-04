@@ -11,10 +11,24 @@ GeubsikPy는 Python 으로 작성된, [급식어](https://github.com/GeubsikLang
 앙 헬로월드띠~
 ```
 
+`ㄱㄱ.py` 는 하나의 명령행 인자를 받으며 그 파일을 바로 컴파일 후 실행합니다.
+`geubsikpy.py` 의 사용법은 아래와 같습니다:
+```cmd
+usage: geubsikpy.py [-h] {run,build} FILE
+
+positional arguments:
+  run          Compile source file and execute
+  build        Generate compiled source file
+
+optional arguments:
+  -h, --help   show this help message and exit
+
+```
+
 ```text
-$python ㄱㄱ.py run 너가만든거.기모띠
+$python ㄱㄱ.py 너가만든거.기모띠
 Hello, world!
-$python ㄱㄱ.py build 너가만든거.기모띠
+$python geubsikpy.py build 너가만든거.기모띠
 ...
 ```
 
