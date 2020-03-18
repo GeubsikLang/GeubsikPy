@@ -1,4 +1,9 @@
-from compiler.codegen.BuiltinsCodegen import PrintBuilder, WhileBuilder, InputBuilder, InputIntBuilder
+from compiler.codegen.BuiltinsCodegen import (
+    PrintBuilder,
+    WhileBuilder,
+    InputBuilder,
+    InputIntBuilder,
+)
 from compiler.codegen.ConditionCodegen import ConditionalCodeBuilder
 from compiler.codegen.FunctionCodegen import FunctionBuilder
 from compiler.parser.Keywords import *
@@ -8,7 +13,6 @@ from generators.context.ValueContext import ValueLoader
 
 
 class ProgramStringBuilder(object):
-
     def __init__(self):
         self.conditional_builder: ConditionalCodeBuilder = ConditionalCodeBuilder()
         self.program_string = StringBuilder()
@@ -31,7 +35,7 @@ class ProgramStringBuilder(object):
                     self.println(self.conditional_builder.format(item))
                 elif _type == ELSE:
                     self.indent -= 1
-                    self.println('else:')
+                    self.println("else:")
                 else:
                     self._build(item)
                     continue
@@ -65,9 +69,7 @@ class ProgramStringBuilder(object):
         return self.program_string.__str__()
 
     def println(self, s):
-        self.program_string.println(
-            ' ' * self.indent + s
-        )
+        self.program_string.println(" " * self.indent + s)
 
     def to_string(self) -> str:
         return self.__str__()

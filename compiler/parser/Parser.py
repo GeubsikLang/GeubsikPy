@@ -14,20 +14,20 @@ def parse(token_arr: tuple or list, origin: str) -> list or tuple:
     elif _type == PRINT:
         return PrintExpr(origin).elements
 
-    elif search(r'.+이거 *ㄹㅇ +ㅆㅅ.+', origin):
+    elif search(r".+이거 *ㄹㅇ +ㅆㅅ.+", origin):
         return InputExpr(origin).elements
 
-    elif search(r'.+이거 *ㄹㅇ +ㅆㅎ.+', origin):
+    elif search(r".+이거 *ㄹㅇ +ㅆㅎ.+", origin):
         return InputIntExpr(origin).elements
 
-    elif search(r'.+[은는].+인거', origin):
+    elif search(r".+[은는].+인거", origin):
         return AssignExpr(origin).elements
 
     elif _type == FNDECL:
         return FnDeclExpr(origin).elements
 
     elif _type == FNEND:
-        return FNEND,
+        return (FNEND,)
 
     elif _type == FNCALL:
         return FnCallExpr(origin, token_arr.copy()).elements
@@ -36,19 +36,19 @@ def parse(token_arr: tuple or list, origin: str) -> list or tuple:
         return WhileExpr(origin).elements
 
     elif _type == WHILEEND:
-        return WHILEEND,
+        return (WHILEEND,)
 
     elif origin.endswith(IF):
         return IfExpr(origin).elements
 
-    elif search(r'.+열혈팬 시청자들', origin):
+    elif search(r".+열혈팬 시청자들", origin):
         return ElseifExpr(origin).elements
 
     elif _type == ELSE:
-        return ELSE,
+        return (ELSE,)
 
     elif _type == IFEND:
-        return IFEND,
+        return (IFEND,)
 
     else:
         return None

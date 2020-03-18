@@ -12,9 +12,7 @@ from generators.GenerateProgram import ProgramStringBuilder
 
 def main(command: str, s: str) -> int:
     if not s.endswith(".기모띠"):
-        print(
-            "확장자는 기모띠여야지 바보야"
-        )
+        print("확장자는 기모띠여야지 바보야")
         return 0
 
     start_time = time.time()
@@ -34,12 +32,14 @@ def main(command: str, s: str) -> int:
         Interpret(s).exec(program_string.to_string())
 
     elif command == "build":
-        FileGenerator.gen(pathlib.Path(s).name.replace(".기모띠", "") + ".py", program_string.to_string())
+        FileGenerator.gen(
+            pathlib.Path(s).name.replace(".기모띠", "") + ".py", program_string.to_string()
+        )
 
     print("\n%.5f초만에 끝났다." % complete_time)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command")
 
