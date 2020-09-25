@@ -31,7 +31,7 @@ class AssignExpr(Expression):
         super().__init__()
         self.expr = expr
         self.tokens = search(
-            r"(?P<var_name>[a-zA-Z가-힣][a-zA-Z가-힣0-9_]*)[은는]"
+            r"(?P<var_name>[a-zA-Z가-힣ㄱ-ㅎ][a-zA-Z가-힣ㄱ-ㅎ0-9_]*)[은는]"
             r"(?P<value>.+)인거 ㅇㅈ\?( *ㅇ ?ㅇㅈ~)?",
             self.expr,
         )
